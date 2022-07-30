@@ -1,0 +1,56 @@
+https://leetcode.com/problems/zigzag-conversion/
+
+Problem:
+
+The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this:
+(you may want to display this pattern in a fixed font for better legibility)
+Solution:
+
+public class Solution {
+    public string Convert(string s, int numRows)
+        {
+            if (numRows == 1) return s;
+            List<StringBuilder> sbs = new List<StringBuilder>();
+            int rows = (int)Math.Min((int)s.Length, (int)numRows);
+            for (int i = 0; i < rows; i++)
+            {
+                sbs.Add(new StringBuilder());
+            }
+            int count = 1;
+            bool goingdown = true;
+            for(int i = 0; i < s.Length; i++)
+            {
+                if (count <= rows && goingdown)
+                {
+                    sbs[count-1].Append(s[i]);
+                    count++;
+                }
+                else if(count > 1)
+                {
+                    goingdown = false;
+                    count--;
+
+                    if(count == rows)
+                    {
+                        count--;
+                    }
+                    sbs[count - 1].Append(s[i]);
+
+                    if(count == 1)
+                    {
+                        goingdown = true;
+                        count++;
+                    }
+
+                }
+
+            }
+            StringBuilder result = new StringBuilder();
+            foreach (var sb in sbs)
+            {
+                result.Append(sb);
+            }
+            return result.ToString();
+        }
+  
+}
