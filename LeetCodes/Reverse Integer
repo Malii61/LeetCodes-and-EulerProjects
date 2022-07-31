@@ -1,0 +1,40 @@
+https://leetcode.com/problems/reverse-integer/
+
+Problem:
+Given a signed 32-bit integer x, return x with its digits reversed. 
+If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
+Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+
+Solution (Overflow Exception):
+public class Solution {
+    public int Reverse(int x)
+            {
+                if (Math.Abs(x) < 10)
+                {
+                    return x;
+                }
+                else if (x < (int)Math.Pow(2, 31) || x >Math.Abs((int)Math.Pow(-2, 30)))
+                {
+                    return 0;
+                }
+                List<int> nums = new List<int>();
+                while (true)
+                {
+                    nums.Add(x % 10);
+                    x = x / 10;
+                    if (Math.Abs(x) < 10)
+                    {
+                        nums.Add(x);
+                        break;
+                    }
+                }
+                int result = 0;
+                int digit = nums.Count;
+                foreach (int num in nums)
+                {
+                    result += num * (int)Math.Pow(10, digit - 1);
+                    digit--;
+                }
+                return result;
+        }
+}
