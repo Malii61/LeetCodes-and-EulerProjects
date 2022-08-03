@@ -1,0 +1,57 @@
+https://leetcode.com/problems/3sum/
+
+Problem:
+
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+Notice that the solution set must not contain duplicate triplets.
+
+Solution (Time Limit Exceeded):
+
+
+    public class Solution
+    {
+        public IList<IList<int>> ThreeSum(int[] nums)
+        {
+            List<IList<int>> res = new List<IList<int>>();
+
+            if (nums == null || nums.Length < 3)
+                return res;
+
+            Array.Sort(nums);
+            for (int i = 0; i < nums.Length - 2; i++)
+            {
+                int left = i + 1;
+                int right = nums.Length - 1;
+                while (left < right)
+                {
+
+                    if (nums[i] + nums[left] + nums[right] == 0)
+                    {
+                        List<int> l = new List<int> { nums[left], nums[i], nums[right] };
+                        bool equal = false;
+                        foreach (var list in res)
+                        {
+                            bool isEqual = Enumerable.SequenceEqual(list.OrderBy(e => e), l.OrderBy(e => e));
+                            if (isEqual)
+                            {
+                                equal = true;
+                                break;
+                            }
+                        }
+                        if (!equal)
+                            res.Add(l);
+                        left++;
+                        right--;
+                    }
+                    while (left < right && nums[i] + nums[left] + nums[right] < 0)
+                        left++;
+                    while (left < right && nums[i] + nums[left] + nums[right] > 0)
+                        right--;
+                }
+            }
+
+            return res;
+        }
+    }
+
