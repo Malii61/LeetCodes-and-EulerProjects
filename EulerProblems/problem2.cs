@@ -18,7 +18,7 @@ namespace EulerProblems_
             int i = 1;
             int j = 2;
             int k = 3;
-            int multiply = 2;
+            int sum = 2;
             myList.Add(i);
             myList.Add(j);
             while (true)
@@ -29,14 +29,14 @@ namespace EulerProblems_
                 k = i + j;
                 if (k % 2 == 0)
                 {
-                    multiply += k;
+                    sum += k;
                 }
                 if (k > 4000000)
                 {
                     break;
                 }
             }
-            Console.WriteLine(multiply);
+            Console.WriteLine(sum);
         }
 
     }
